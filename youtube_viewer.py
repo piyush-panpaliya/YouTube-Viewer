@@ -363,6 +363,9 @@ def check_proxy(agent, proxy, proxy_type):
 
 def get_driver(agent, proxy, proxy_type, pluginfile):
     options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
     options.headless = background
     options.add_argument(f"--window-size={choice(VIEWPORT)}")
     options.add_argument("--log-level=3")
@@ -445,7 +448,7 @@ def get_driver(agent, proxy, proxy_type, pluginfile):
     else:
         options.add_argument(f'--proxy-server={proxy_type}://{proxy}')
 
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome('chromedriver',options=options)
 
     return driver
 
